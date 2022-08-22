@@ -2,23 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Youbuwei\IPLocation\Driver;
+namespace Youbuwei\IPLocation\Api;
 
+use Hyperf\Config\Annotation\Value;
 use Psr\Http\Message\RequestInterface;
 use Youbuwei\IPLocation\Exception\LocationException;
-use Youbuwei\IPLocation\LocationDriverInterface;
+use Youbuwei\IPLocation\LocationApiInterface;
 
-class TencentLocation implements LocationDriverInterface
+class TencentLocation implements LocationApiInterface
 {
-    private array $config;
-
-    public function __construct($config)
-    {
-        $this->config = $config;
-    }
+    #[Value('ip-location.tencent')]
+    protected array $config;
 
     /**
      * @param $ip
+     * @return RequestInterface
      */
     public function makeRequest($ip): RequestInterface
     {
@@ -48,12 +46,13 @@ class TencentLocation implements LocationDriverInterface
             throw new LocationException($location['message']);
         }
 
-        return $location['result']['location'] ?? false;
+        return $location['result'] ?? false;
     }
 
     /**
      * generate signature.
      * @param $params
+     * @return string
      */
     private function sign($params): string
     {

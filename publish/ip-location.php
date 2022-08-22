@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 return [
     'enable' => true,
-    'use' => 'ip-api',
     'cache' => [
         'enable' => true,
         'expire' => 86400,
@@ -19,7 +18,7 @@ return [
         'method' => 'GET',
         'domain' => 'https://apis.map.qq.com',
         'uri' => '/ws/location/v1/ip',
-        'key' => 'AAAA-BBBB-CCCC-DDDD-EEEE-FFFF',
+        'key' => '',
         'secret' => '',
     ],
 ];

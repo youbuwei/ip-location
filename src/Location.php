@@ -11,18 +11,11 @@ use Youbuwei\IPLocation\Exception\LocationException;
 
 class Location
 {
-    private const DRIVERS = [
-        'ip-api' => Driver\IP_API::class,
-        'tencent' => Driver\TencentLocation::class,
-    ];
-
-    private LocationDriverInterface $locationDriver;
-
     public function __construct(
-        protected HttpClient $httpClient,
-        protected ConfigInterface $config,
+        protected HttpClient           $httpClient,
+        protected ConfigInterface      $config,
+        protected LocationApiInterface $locationDriver,
     ) {
-        $this->locationDriver = $this->getDriver();
     }
 
     /**
@@ -52,26 +45,6 @@ class Location
         }
 
         return $this->locationDriver->getLocation($location);
-    }
-
-    private function getDriver(): LocationDriverInterface
-    {
-        $config = $this->config->get('ip-location');
-        $driver = self::DRIVERS[$config['use']] ?? null;
-
-        if (is_null($driver)) {
-            throw new LocationException('No Location driver found');
-        }
-
-        if (isset($config[$config['use']]) === false) {
-            throw new LocationException('No Location driver config found');
-        }
-
-        if (class_exists($driver) === false) {
-            throw new LocationException('No Location driver class found');
-        }
-
-        return make($driver, ['config' => $config[$config['use']]]);
     }
 
     private function isEnable()

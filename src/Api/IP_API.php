@@ -2,22 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Youbuwei\IPLocation\Driver;
+namespace Youbuwei\IPLocation\Api;
 
+use Hyperf\Config\Annotation\Value;
 use Psr\Http\Message\RequestInterface;
 use Youbuwei\IPLocation\Exception\LocationException;
-use Youbuwei\IPLocation\LocationDriverInterface;
+use Youbuwei\IPLocation\LocationApiInterface;
 
-class IP_API implements LocationDriverInterface
+class IP_API implements LocationApiInterface
 {
-    protected string $ip;
-
+    #[Value('ip-location.ip-api')]
     protected array $config;
-
-    public function __construct(array $config)
-    {
-        $this->config = $config;
-    }
 
     public function makeRequest($ip): RequestInterface
     {

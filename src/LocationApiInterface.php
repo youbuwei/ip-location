@@ -6,10 +6,8 @@ namespace Youbuwei\IPLocation;
 
 use Psr\Http\Message\RequestInterface;
 
-interface LocationDriverInterface
+interface LocationApiInterface
 {
-    public function __construct(array $config);
-
     public function makeRequest($ip): RequestInterface;
 
     public function getLocation(string $location): array|bool;
