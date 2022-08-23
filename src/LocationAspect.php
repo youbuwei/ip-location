@@ -28,9 +28,15 @@ class LocationAspect extends AbstractAspect
      */
     public function process(ProceedingJoinPoint $proceedingJoinPoint)
     {
+        // 未使用缓存或者其他方法直接返回
         if ($proceedingJoinPoint->methodName !== 'getLocation'
             || $this->config->get('ip-location.cache.enable') === false) {
             return $proceedingJoinPoint->process();
+        }
+
+        // 未开启返回 false
+        if ($this->config->get('ip-location.enable', false) === false) {
+            return false;
         }
 
         $args = $proceedingJoinPoint->getArguments();

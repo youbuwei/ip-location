@@ -63,5 +63,7 @@ jobs:
         run: composer update -o --no-scripts
       - name: Run Test Cases
         run: |
+          composer require phpstan/phpstan --dev
+          composer require phpunit/phpunit --dev
           composer analyse
           composer test

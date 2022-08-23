@@ -5,38 +5,38 @@ declare(strict_types=1);
 namespace Youbuwei\IPLocation;
 
 use GuzzleHttp\Exception\GuzzleException;
-use Hyperf\Contract\ConfigInterface;
+use Hyperf\Config\Annotation\Value;
+use Hyperf\Guzzle\ClientFactory;
 use Psr\SimpleCache\InvalidArgumentException;
 use Youbuwei\IPLocation\Exception\LocationException;
 
 class Location
 {
+    #[Value('ip-location')]
+    protected array $config;
+
     public function __construct(
-        protected HttpClient           $httpClient,
-        protected ConfigInterface      $config,
-        protected LocationApiInterface $locationDriver,
+        protected LocationApiInterface $locationApi,
+        protected ClientFactory        $clientFactory,
     ) {
     }
 
     /**
-     * @throws GuzzleException|LocationException
-     * @throws InvalidArgumentException
+     * @throws GuzzleException|LocationException|InvalidArgumentException
      */
-    public function getLocation(?string $ip): bool|array
+    public function getLocation(string $ip): bool|array
     {
         if ($this->isEnable() === false) {
             return false;
         }
 
-        $ip = $ip ?: $this->httpClient->getClientIP();
-
         if (filter_var($ip, FILTER_VALIDATE_IP) === false) {
             throw new LocationException('Invalid IP');
         }
 
-        $request = $this->locationDriver->makeRequest($ip);
+        $request = $this->locationApi->makeRequest($ip);
 
-        $response = $this->httpClient->getHttpClient()->send($request);
+        $response = $this->getHttpClient()->send($request);
 
         if ($response->getStatusCode() === 200) {
             $location = $response->getBody()->getContents();
@@ -44,11 +44,22 @@ class Location
             throw new LocationException('IP Location request error');
         }
 
-        return $this->locationDriver->getLocation($location);
+        return $this->locationApi->getLocation($location);
     }
 
-    private function isEnable()
+    /**
+     *
+     * @return bool
+     */
+    public function isEnable(): bool
     {
-        return $this->config->get('ip-location.enable');
+        return (bool) ($this->config['enable'] ?? false);
+    }
+
+    private function getHttpClient(): \GuzzleHttp\Client
+    {
+        return $this->clientFactory->create([
+            'verify' => false,
+        ]);
     }
 }
