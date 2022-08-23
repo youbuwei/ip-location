@@ -21,4 +21,11 @@ return [
         'key' => '',
         'secret' => '',
     ],
+    'amap' => [
+        'method' => 'GET',
+        'domain' => 'https://restapi.amap.com',
+        'uri' => '/v3/ip',
+        'key' => '',
+        'secret' => '',
+    ],
 ];
