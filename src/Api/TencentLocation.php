@@ -38,6 +38,10 @@ class TencentLocation implements LocationApiInterface
         ]);
     }
 
+    /**
+     * @param string $location
+     * @return array|bool
+     */
     public function getLocation(string $location): array|bool
     {
         $location = json_decode($location, true);

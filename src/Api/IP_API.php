@@ -14,6 +14,10 @@ class IP_API implements LocationApiInterface
     #[Value('ip-location.ip-api')]
     protected array $config;
 
+    /**
+     * @param $ip
+     * @return RequestInterface
+     */
     public function makeRequest($ip): RequestInterface
     {
         $params = [
@@ -26,6 +30,10 @@ class IP_API implements LocationApiInterface
         ]);
     }
 
+    /**
+     * @param string $location
+     * @return array|bool
+     */
     public function getLocation(string $location): array|bool
     {
         $location = json_decode($location, true);

@@ -28,4 +28,13 @@ return [
         'key' => '',
         'secret' => '',
     ],
+    'baidu' => [
+        'method' => 'GET',
+        'domain' => 'https://api.map.baidu.com',
+        'uri' => '/location/ip',
+        'ak' => '',
+        'sk' => '',
+        'use_sn' => false,
+        'coor' => '',
+    ],
 ];
