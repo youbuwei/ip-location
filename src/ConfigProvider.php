@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Youbuwei\IPLocation;
 
-use Youbuwei\IPLocation\Api\IP_API;
+use Youbuwei\IPLocation\Api\LocalLocation;
+use Youbuwei\IPLocation\Listener\LocationTableListener;
 
 class ConfigProvider
 {
@@ -12,7 +13,10 @@ class ConfigProvider
     {
         return [
             'dependencies' => [
-                LocationApiInterface::class => IP_API::class
+                LocationApiInterface::class => LocalLocation::class
+            ],
+            'listeners' => [
+                LocationTableListener::class,
             ],
             'commands' => [
             ],

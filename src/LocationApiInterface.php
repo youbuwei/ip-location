@@ -8,7 +8,7 @@ use Psr\Http\Message\RequestInterface;
 
 interface LocationApiInterface
 {
-    public function makeRequest($ip): RequestInterface;
+    public function makeRequest($ip): RequestInterface|bool;
 
     public function getLocation(string $location): array|bool;
 }

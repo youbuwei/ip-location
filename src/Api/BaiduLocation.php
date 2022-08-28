@@ -43,9 +43,9 @@ class BaiduLocation implements LocationApiInterface
 
     /**
      * @param $ip
-     * @return RequestInterface
+     * @return RequestInterface|bool
      */
-    public function makeRequest($ip): RequestInterface
+    public function makeRequest($ip): RequestInterface|bool
     {
         $params = [
             'ip' => $ip,

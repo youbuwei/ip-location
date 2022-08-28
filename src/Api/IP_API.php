@@ -16,9 +16,9 @@ class IP_API implements LocationApiInterface
 
     /**
      * @param $ip
-     * @return RequestInterface
+     * @return RequestInterface|bool
      */
-    public function makeRequest($ip): RequestInterface
+    public function makeRequest($ip): RequestInterface|bool
     {
         $params = [
             'lang' => $this->config['lang'],

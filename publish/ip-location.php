@@ -37,4 +37,7 @@ return [
         'use_sn' => false,
         'coor' => '',
     ],
+    'cz88' => [
+        'db-path' => '',
+    ]
 ];

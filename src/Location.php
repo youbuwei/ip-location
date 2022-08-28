@@ -22,6 +22,7 @@ class Location
     }
 
     /**
+     * 获取IP地址归属地
      * @throws GuzzleException|LocationException|InvalidArgumentException
      */
     public function getLocation(string $ip): bool|array
@@ -36,6 +37,10 @@ class Location
 
         $request = $this->locationApi->makeRequest($ip);
 
+        if ($request === false) {
+            return $this->locationApi->getLocation($ip);
+        }
+
         $response = $this->getHttpClient()->send($request);
 
         if ($response->getStatusCode() === 200) {
@@ -48,7 +53,7 @@ class Location
     }
 
     /**
-     *
+     * Is Enable UP Location
      * @return bool
      */
     public function isEnable(): bool

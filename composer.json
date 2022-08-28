@@ -23,7 +23,12 @@
         "hyperf/di": "~3.0.0",
         "hyperf/config": "~3.0.0",
         "hyperf/guzzle": "~3.0.0",
-        "hyperf/cache": "~3.0.0"
+        "hyperf/event": "~3.0.0",
+        "hyperf/cache": "~3.0.0",
+        "hyperf/framework": "~3.0.0"
+    },
+    "require-dev": {
+        "swoole/ide-helper": "5.0.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -39,6 +44,12 @@
     "extra": {
         "hyperf": {
             "config": "Youbuwei\\IPLocation\\ConfigProvider"
+        }
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://mirrors.aliyun.com/composer"
         }
     }
 }
