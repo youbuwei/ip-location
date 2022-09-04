@@ -27,9 +27,6 @@
         "hyperf/cache": "~3.0.0",
         "hyperf/framework": "~3.0.0"
     },
-    "require-dev": {
-        "swoole/ide-helper": "5.0.0"
-    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {

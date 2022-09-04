@@ -17,24 +17,20 @@ class LocalLocation implements LocationApiInterface
 
     /**
      * @param $ip
-     * @return RequestInterface|bool
+     * @return RequestInterface|null
      */
-    public function makeRequest($ip): RequestInterface|bool
+    public function makeRequest($ip): ?RequestInterface
     {
-        return false;
+        return null;
     }
 
     /**
      * @param string $ip
-     * @return array|bool
+     * @return array|null
      */
-    public function getLocation(string $ip): array|bool
+    public function getLocation(string $ip): ?array
     {
-        $ip2long = ip2long($ip);
-        $region = $this->localLocationTable->getRegionDirect($ip2long);
-        if ($region === false) {
-            $region = $this->localLocationTable->getRegion($ip2long);
-        }
+        $region = $this->localLocationTable->getRegion($ip);
 
         return ['ip' => $ip, 'region' => $region];
     }

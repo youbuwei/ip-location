@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Youbuwei\IPLocation\Listener;
 
 use Hyperf\Contract\ContainerInterface;

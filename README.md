@@ -1,11 +1,10 @@
 # IP地址归属地/IP定位
 
 [![Test](https://github.com/youbuwei/ip-location/actions/workflows/test.yml/badge.svg)](https://github.com/youbuwei/ip-location/actions/workflows/test.yml)
-[![Latest Stable Version](http://poser.pugx.org/youbuwei/ip-location/v)](https://packagist.org/packages/youbuwei/ip-location)
+[![Latest Version](https://img.shields.io/packagist/v/youbuwei/ip-location.svg)](https://packagist.org/packages/youbuwei/ip-location)
 [![Php Version](https://img.shields.io/badge/php-%3E=8.0-brightgreen.svg?maxAge=2592000)](https://www.php.net)
-[![Swoole Version](https://img.shields.io/badge/swoole-%3E=4.5-brightgreen.svg?maxAge=2592000)](https://github.com/swoole/swoole-src)
+[![Swoole Version](https://img.shields.io/badge/swoole-%3E=4.8-brightgreen.svg?maxAge=2592000)](https://github.com/swoole/swoole-src)
 [![Hyperf Version](https://img.shields.io/badge/Hyperf-%3E=3.0-brightgreen.svg?maxAge=2592000)](https://github.com/hyperf/hyperf)
-[![Total Downloads](http://poser.pugx.org/youbuwei/ip-location/downloads)](https://packagist.org/packages/youbuwei/ip-location)
 [![License](https://img.shields.io/github/license/youbuwei/ip-location.svg?maxAge=2592000)](https://github.com/youbuwei/ip-location/blob/master/LICENSE)
 
 ## 安装
@@ -40,7 +39,6 @@ declare(strict_types=1);
 return [
     \Youbuwei\IPLocation\LocationApiInterface::class => \Youbuwei\IPLocation\Api\TencentLocation::class,
 ];
-
 ```
 
 ### 缓存
@@ -127,9 +125,9 @@ use Psr\Http\Message\RequestInterface;
 
 interface LocationApiInterface
 {
-    public function makeRequest($ip): RequestInterface|bool;
+    public function makeRequest($ip): ?RequestInterface;
 
-    public function getLocation(string $location): array|bool;
+    public function getLocation(string $location): ?array;
 }
 ```
 
@@ -160,3 +158,7 @@ class IndexController extends AbstractController
     }
 }
 ```
+
+# License
+
+The IPLocation Library is open-source software licensed under the MIT license.

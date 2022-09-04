@@ -6,6 +6,8 @@ namespace Youbuwei\IPLocation;
 
 use Youbuwei\IPLocation\Api\LocalLocation;
 use Youbuwei\IPLocation\Listener\LocationTableListener;
+use Youbuwei\IPLocation\Storage\Driver\SwooleTable;
+use Youbuwei\IPLocation\Storage\StorageDriverInterface;
 
 class ConfigProvider
 {
@@ -13,7 +15,8 @@ class ConfigProvider
     {
         return [
             'dependencies' => [
-                LocationApiInterface::class => LocalLocation::class
+                LocationApiInterface::class => LocalLocation::class,
+                StorageDriverInterface::class => SwooleTable::class,
             ],
             'listeners' => [
                 LocationTableListener::class,

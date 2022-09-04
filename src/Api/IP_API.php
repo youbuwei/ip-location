@@ -16,9 +16,9 @@ class IP_API implements LocationApiInterface
 
     /**
      * @param $ip
-     * @return RequestInterface|bool
+     * @return RequestInterface|null
      */
-    public function makeRequest($ip): RequestInterface|bool
+    public function makeRequest($ip): ?RequestInterface
     {
         $params = [
             'lang' => $this->config['lang'],
@@ -32,9 +32,9 @@ class IP_API implements LocationApiInterface
 
     /**
      * @param string $location
-     * @return array|bool
+     * @return array|null
      */
-    public function getLocation(string $location): array|bool
+    public function getLocation(string $location): ?array
     {
         $location = json_decode($location, true);
 

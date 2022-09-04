@@ -16,9 +16,9 @@ class TencentLocation implements LocationApiInterface
 
     /**
      * @param $ip
-     * @return RequestInterface|bool
+     * @return RequestInterface|null
      */
-    public function makeRequest($ip): RequestInterface|bool
+    public function makeRequest($ip): ?RequestInterface
     {
         $params = [
             'key' => $this->config['key'],
@@ -40,9 +40,9 @@ class TencentLocation implements LocationApiInterface
 
     /**
      * @param string $location
-     * @return array|bool
+     * @return array|null
      */
-    public function getLocation(string $location): array|bool
+    public function getLocation(string $location): ?array
     {
         $location = json_decode($location, true);
 
@@ -50,7 +50,7 @@ class TencentLocation implements LocationApiInterface
             throw new LocationException($location['message']);
         }
 
-        return $location['result'] ?? false;
+        return $location['result'] ?? null;
     }
 
     /**

@@ -37,7 +37,7 @@ class Location
 
         $request = $this->locationApi->makeRequest($ip);
 
-        if ($request === false) {
+        if ($request === null) {
             return $this->locationApi->getLocation($ip);
         }
 
@@ -61,6 +61,9 @@ class Location
         return (bool) ($this->config['enable'] ?? false);
     }
 
+    /**
+     * @return \GuzzleHttp\Client
+     */
     private function getHttpClient(): \GuzzleHttp\Client
     {
         return $this->clientFactory->create([
